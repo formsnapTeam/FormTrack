@@ -1,0 +1,203 @@
+/* ========================================
+   Status Progress - Premium Dark Mode
+   ======================================== */
+
+.status-progress {
+    padding: 1.5rem;
+}
+
+.progress-pipeline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding: 0 1rem;
+}
+
+/* Progress Line */
+.progress-pipeline::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    right: 2rem;
+    height: 3px;
+    background: var(--bg-tertiary);
+    transform: translateY(-50%);
+    border-radius: 2px;
+    z-index: 0;
+}
+
+.progress-pipeline::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    height: 3px;
+    background: var(--gradient-primary);
+    transform: translateY(-50%);
+    border-radius: 2px;
+    z-index: 1;
+    transition: width var(--transition-slow);
+}
+
+/* Dynamic width based on status */
+.progress-pipeline[data-status="Applied"]::after {
+    width: 0%;
+}
+
+.progress-pipeline[data-status="Test"]::after {
+    width: 20%;
+}
+
+.progress-pipeline[data-status="Interview"]::after {
+    width: 40%;
+}
+
+.progress-pipeline[data-status="Shortlisted"]::after {
+    width: 60%;
+}
+
+.progress-pipeline[data-status="Offer"]::after {
+    width: 80%;
+}
+
+.progress-pipeline[data-status="Rejected"]::after {
+    width: 100%;
+    background: linear-gradient(90deg, var(--primary-500), var(--status-rejected));
+}
+
+/* Progress Step */
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    transition: transform var(--transition-fast);
+}
+
+.progress-step:hover {
+    transform: scale(1.05);
+}
+
+.step-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 3px solid var(--bg-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    transition: all var(--transition-base);
+    position: relative;
+}
+
+.step-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    transition: color var(--transition-fast);
+}
+
+/* States */
+.progress-step.completed .step-circle {
+    background: var(--gradient-primary);
+    border-color: var(--primary-500);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+}
+
+.progress-step.completed .step-label {
+    color: var(--primary-400);
+}
+
+.progress-step.current .step-circle {
+    background: var(--gradient-primary);
+    border-color: var(--primary-500);
+    animation: glow 2s ease-in-out infinite;
+}
+
+.progress-step.current .step-label {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.progress-step.rejected .step-circle {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    border-color: var(--status-rejected);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+}
+
+.progress-step.rejected .step-label {
+    color: var(--status-rejected);
+}
+
+/* Pulse animation for current step */
+.progress-step.current .step-circle::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-500);
+    animation: pulse-ring 2s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.3);
+        opacity: 0;
+    }
+}
+
+/* Compact Mode */
+.status-progress.compact {
+    padding: 0.75rem 1rem;
+}
+
+.status-progress.compact .progress-pipeline {
+    gap: 0.5rem;
+}
+
+.status-progress.compact .step-circle {
+    width: 32px;
+    height: 32px;
+    font-size: 0.875rem;
+}
+
+.status-progress.compact .step-label {
+    display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .progress-pipeline {
+        padding: 0;
+    }
+
+    .step-circle {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+
+    .step-label {
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .step-label {
+        display: none;
+    }
+}

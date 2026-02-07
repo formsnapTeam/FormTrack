@@ -1,0 +1,89 @@
+/* ========================================
+   Premium Cursor - Dot + Ring
+   ======================================== */
+
+* {
+    cursor: none !important;
+}
+
+/* Small central dot */
+.cursor-dot {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--primary-500, #8b5cf6);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
+}
+
+.cursor-dot.hover {
+    width: 12px;
+    height: 12px;
+    background: var(--accent-cyan, #22d3ee);
+}
+
+.cursor-dot.click {
+    width: 6px;
+    height: 6px;
+}
+
+/* Outer following ring */
+.cursor-ring {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--primary-400, #a78bfa);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
+    opacity: 0.6;
+}
+
+.cursor-ring.hover {
+    width: 60px;
+    height: 60px;
+    border-color: var(--accent-cyan, #22d3ee);
+    opacity: 0.8;
+}
+
+.cursor-ring.click {
+    width: 30px;
+    height: 30px;
+    opacity: 1;
+}
+
+/* Light mode */
+[data-theme="light"] .cursor-dot {
+    background: var(--primary-600, #7c3aed);
+}
+
+[data-theme="light"] .cursor-ring {
+    border-color: var(--primary-500, #8b5cf6);
+}
+
+[data-theme="light"] .cursor-dot.hover {
+    background: var(--primary-600, #7c3aed);
+}
+
+[data-theme="light"] .cursor-ring.hover {
+    border-color: var(--primary-600, #7c3aed);
+}
+
+/* Hide on mobile */
+@media (max-width: 768px),
+(hover: none),
+(pointer: coarse) {
+    * {
+        cursor: auto !important;
+    }
+
+    .cursor-dot,
+    .cursor-ring {
+        display: none !important;
+    }
+}

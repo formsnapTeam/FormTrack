@@ -1,0 +1,413 @@
+/* ========================================
+   Dashboard - Premium Dark Mode Design
+   ======================================== */
+
+.dashboard-page {
+    animation: fadeIn var(--transition-slow) ease;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.dashboard-header h1 {
+    margin-bottom: 0.25rem;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.dashboard-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    gap: 1rem;
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--primary-500);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ========================================
+   Deadline Alert Banner
+   ======================================== */
+.deadline-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, rgba(251, 146, 60, 0.15) 0%, rgba(239, 68, 68, 0.1) 100%);
+    border: 1px solid rgba(251, 146, 60, 0.3);
+    border-radius: var(--border-radius-lg);
+    color: var(--accent-orange);
+    font-size: 0.9375rem;
+    animation: fadeInDown var(--transition-base) ease;
+}
+
+.deadline-icon {
+    font-size: 1.25rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Filters */
+.dashboard-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.25rem;
+    background: var(--bg-card);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border-color);
+}
+
+.search-input {
+    flex: 1;
+    max-width: 400px;
+}
+
+.status-select {
+    width: 180px;
+}
+
+/* Table Styles */
+.table-container {
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+}
+
+.app-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.app-title {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.app-company {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+/* Status Badge */
+.status-badge {
+    padding: 0.5rem 1rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border-radius: var(--border-radius-full);
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all var(--transition-fast);
+}
+
+.status-badge.badge-applied {
+    background: rgba(99, 102, 241, 0.15);
+    color: var(--status-applied);
+}
+
+.status-badge.badge-test {
+    background: rgba(167, 139, 250, 0.15);
+    color: var(--status-test);
+}
+
+.status-badge.badge-interview {
+    background: rgba(251, 191, 36, 0.15);
+    color: var(--status-interview);
+}
+
+.status-badge.badge-shortlisted {
+    background: rgba(34, 211, 238, 0.15);
+    color: var(--status-shortlisted);
+}
+
+.status-badge.badge-offer {
+    background: rgba(74, 222, 128, 0.15);
+    color: var(--status-offer);
+}
+
+.status-badge.badge-rejected {
+    background: rgba(248, 113, 113, 0.15);
+    color: var(--status-rejected);
+}
+
+/* ========================================
+   Deadline Cells - Color Coded
+   ======================================== */
+.deadline-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.deadline-date {
+    font-size: 0.875rem;
+}
+
+.deadline-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+/* Today - Red pulsing */
+.deadline-today .deadline-date {
+    color: #ef4444;
+    font-weight: 700;
+}
+
+.deadline-today .deadline-label {
+    color: #ef4444;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+/* Urgent (1-2 days) - Orange */
+.deadline-urgent .deadline-date {
+    color: #f97316;
+    font-weight: 600;
+}
+
+.deadline-urgent .deadline-label {
+    color: #f97316;
+}
+
+/* Warning (3-5 days) - Yellow/Amber */
+.deadline-warning .deadline-date {
+    color: #eab308;
+}
+
+.deadline-warning .deadline-label {
+    color: #eab308;
+}
+
+/* Soon (6-7 days) - Cyan */
+.deadline-soon .deadline-date {
+    color: var(--accent-cyan);
+}
+
+.deadline-soon .deadline-label {
+    color: var(--accent-cyan);
+}
+
+/* Normal (8+ days) */
+.deadline-normal .deadline-date {
+    color: var(--text-secondary);
+}
+
+/* Passed - Red strikethrough */
+.deadline-passed .deadline-date {
+    color: var(--status-rejected);
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.deadline-passed .deadline-label {
+    color: var(--status-rejected);
+}
+
+/* Urgent row highlight */
+.row-urgent {
+    background: rgba(239, 68, 68, 0.05) !important;
+}
+
+.row-urgent:hover {
+    background: rgba(239, 68, 68, 0.08) !important;
+}
+
+/* Action Buttons */
+.action-btns {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Empty State */
+.empty-state {
+    padding: 5rem 2rem;
+    text-align: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+}
+
+.empty-icon {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.empty-state h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+}
+
+.empty-state p {
+    color: var(--text-secondary);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    padding: 1rem;
+    animation: fadeIn var(--transition-fast) ease;
+}
+
+.modal {
+    width: 100%;
+    max-width: 500px;
+    animation: scaleIn var(--transition-base) ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+    font-size: 1.25rem;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.75rem;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.modal-close:hover {
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.bookmarklet-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 2rem;
+    background: var(--gradient-primary);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: var(--border-radius-lg);
+    margin: 1.5rem 0;
+    cursor: grab;
+    text-decoration: none;
+    box-shadow: var(--shadow-glow);
+    transition: all var(--transition-base);
+}
+
+.bookmarklet-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: var(--shadow-glow), var(--shadow-lg);
+}
+
+.bookmarklet-instructions {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    background: var(--bg-tertiary);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border-color);
+}
+
+.bookmarklet-instructions h4 {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.bookmarklet-instructions ol {
+    padding-left: 1.25rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.bookmarklet-instructions li {
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .header-buttons {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .header-buttons .btn {
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .dashboard-filters {
+        flex-direction: column;
+    }
+
+    .search-input,
+    .status-select {
+        max-width: none;
+        width: 100%;
+    }
+
+    .action-btns {
+        flex-direction: column;
+    }
+
+    .deadline-banner {
+        flex-direction: column;
+        text-align: center;
+    }
+}

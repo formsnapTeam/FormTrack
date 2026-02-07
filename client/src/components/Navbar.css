@@ -1,0 +1,353 @@
+/* ========================================
+   Navbar - Premium 3-Column Layout
+   ======================================== */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height, 70px);
+    background: rgba(12, 14, 20, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+    z-index: 100;
+}
+
+[data-theme="light"] .navbar {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: #e5e7eb;
+}
+
+.navbar-container {
+    max-width: 1280px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ========================================
+   Left: Brand
+   ======================================== */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.brand-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8b5cf6;
+}
+
+.brand-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.brand-text {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+}
+
+[data-theme="light"] .brand-text {
+    color: #111;
+}
+
+.brand-text .accent {
+    color: #8b5cf6;
+}
+
+/* ========================================
+   Center: Navigation
+   ======================================== */
+.navbar-center {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 6px;
+}
+
+[data-theme="light"] .navbar-center {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: #e5e7eb;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    color: #9ca3af;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.nav-link svg {
+    width: 18px;
+    height: 18px;
+}
+
+.nav-link:hover {
+    color: #fff;
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.nav-link.active {
+    color: #fff;
+    background: rgba(139, 92, 246, 0.15);
+}
+
+[data-theme="light"] .nav-link {
+    color: #6b7280;
+}
+
+[data-theme="light"] .nav-link:hover {
+    color: #111;
+    background: rgba(139, 92, 246, 0.08);
+}
+
+[data-theme="light"] .nav-link.active {
+    color: #7c3aed;
+    background: rgba(139, 92, 246, 0.1);
+}
+
+/* ========================================
+   Right: Actions
+   ======================================== */
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.theme-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+.theme-toggle:hover {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.2);
+    color: #a78bfa;
+}
+
+[data-theme="light"] .theme-toggle {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: #e5e7eb;
+    color: #6b7280;
+}
+
+[data-theme="light"] .theme-toggle:hover {
+    background: rgba(139, 92, 246, 0.08);
+    color: #7c3aed;
+}
+
+/* User Menu */
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 12px 6px 6px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+}
+
+[data-theme="light"] .user-menu {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: #e5e7eb;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #fff;
+}
+
+.user-name {
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: #e5e7eb;
+}
+
+[data-theme="light"] .user-name {
+    color: #374151;
+}
+
+/* Logout Button */
+.btn-logout {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 10px;
+    color: #f87171;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-logout svg {
+    width: 16px;
+    height: 16px;
+}
+
+.btn-logout:hover {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* Auth Buttons (Not Logged In) */
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-text {
+    padding: 10px 20px;
+    color: #e5e7eb;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.btn-text:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="light"] .btn-text {
+    color: #6b7280;
+}
+
+[data-theme="light"] .btn-text:hover {
+    color: #111;
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.btn-login-primary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #8b5cf6;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.btn-login-primary svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.2s ease;
+}
+
+.btn-login-primary:hover {
+    background: #7c3aed;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+
+.btn-login-primary:hover svg {
+    transform: translateX(4px);
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+@media (max-width: 900px) {
+    .navbar-container {
+        grid-template-columns: auto 1fr auto;
+        gap: 16px;
+        padding: 0 20px;
+    }
+
+    .navbar-center {
+        justify-self: center;
+    }
+
+    .nav-link span {
+        display: none;
+    }
+
+    .nav-link {
+        padding: 10px 14px;
+    }
+
+    .user-name {
+        display: none;
+    }
+
+    .btn-logout span {
+        display: none;
+    }
+
+    .btn-logout {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar-container {
+        grid-template-columns: 1fr auto;
+    }
+
+    .navbar-center {
+        display: none;
+    }
+
+    .user-menu {
+        display: none;
+    }
+
+    .btn-login {
+        display: none;
+    }
+}
