@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import './AddApplicationModal.css'
 
-const STATUS_OPTIONS = ['Applied', 'Test', 'Interview', 'Shortlisted', 'Offer', 'Rejected']
+const PLACEMENT_STATUSES = ['Applied', 'Test', 'Interview', 'Shortlisted', 'Offer', 'Rejected']
+const FORM_STATUSES = ['Submitted', 'To Do', 'In Progress', 'Done']
 
 const AddApplicationModal = ({ isOpen, onClose, onAdd }) => {
     const [formData, setFormData] = useState({
         formTitle: '',
         formUrl: '',
         company: '',
+        category: 'Placement',
         status: 'Applied',
         deadline: '',
         notes: ''
@@ -17,7 +19,16 @@ const AddApplicationModal = ({ isOpen, onClose, onAdd }) => {
 
     const handleChange = (e) => {
         const { name, value } = e.target
-        setFormData(prev => ({ ...prev, [name]: value }))
+
+        if (name === 'category') {
+            setFormData(prev => ({
+                ...prev,
+                [name]: value,
+                status: value === 'Placement' ? 'Applied' : 'Submitted'
+            }))
+        } else {
+            setFormData(prev => ({ ...prev, [name]: value }))
+        }
         setError('')
     }
 
@@ -40,6 +51,7 @@ const AddApplicationModal = ({ isOpen, onClose, onAdd }) => {
                 formTitle: '',
                 formUrl: '',
                 company: '',
+                category: 'Placement',
                 status: 'Applied',
                 deadline: '',
                 notes: ''
@@ -92,15 +104,16 @@ const AddApplicationModal = ({ isOpen, onClose, onAdd }) => {
 
                     <div className="form-row">
                         <div className="form-group">
-                            <label className="form-label">Company</label>
-                            <input
-                                type="text"
-                                name="company"
-                                className="form-input"
-                                placeholder="e.g., Google"
-                                value={formData.company}
+                            <label className="form-label">Category</label>
+                            <select
+                                name="category"
+                                className="form-select"
+                                value={formData.category}
                                 onChange={handleChange}
-                            />
+                            >
+                                <option value="Placement">Placement</option>
+                                <option value="Form">General</option>
+                            </select>
                         </div>
                         <div className="form-group">
                             <label className="form-label">Status</label>
@@ -110,11 +123,23 @@ const AddApplicationModal = ({ isOpen, onClose, onAdd }) => {
                                 value={formData.status}
                                 onChange={handleChange}
                             >
-                                {STATUS_OPTIONS.map(status => (
+                                {(formData.category === 'Placement' ? PLACEMENT_STATUSES : FORM_STATUSES).map(status => (
                                     <option key={status} value={status}>{status}</option>
                                 ))}
                             </select>
                         </div>
+                    </div>
+
+                    <div className="form-group">
+                        <label className="form-label">{formData.category === 'Placement' ? 'Company' : 'Organization / Context'}</label>
+                        <input
+                            type="text"
+                            name="company"
+                            className="form-input"
+                            placeholder={formData.category === 'Placement' ? "e.g., Google" : "e.g., College, Event, etc."}
+                            value={formData.company}
+                            onChange={handleChange}
+                        />
                     </div>
 
                     <div className="form-group">

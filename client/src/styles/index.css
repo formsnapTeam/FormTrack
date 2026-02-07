@@ -959,3 +959,12 @@ tbody tr:last-child {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary-500);
 }
+
+/* Utility for SVG Icons in Badges */
+.badge-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 4px;
+  display: inline-block;
+  vertical-align: middle;
+}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import api from '../services/api'
+import { GeneralIcon } from '../components/Icons'
 import './Analytics.css'
 
 const Analytics = () => {
@@ -96,6 +97,16 @@ const Analytics = () => {
                         <div className="stat-content">
                             <div className="stat-value">{stats.total}</div>
                             <div className="stat-label">Total Applications</div>
+                        </div>
+                    </div>
+
+                    <div className="stat-card card">
+                        <div className="stat-icon cyan">
+                            <GeneralIcon className="stat-svg-icon" />
+                        </div>
+                        <div className="stat-content">
+                            <div className="stat-value">{stats.byCategory?.Form || 0}</div>
+                            <div className="stat-label">General Forms</div>
                         </div>
                     </div>
 

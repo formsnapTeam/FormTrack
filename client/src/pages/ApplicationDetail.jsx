@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import api from '../services/api'
+import { PlacementIcon, GeneralIcon } from '../components/Icons'
 import './ApplicationDetail.css'
 
-const STATUS_OPTIONS = ['Applied', 'Test', 'Interview', 'Shortlisted', 'Offer', 'Rejected']
+const PLACEMENT_STATUSES = ['Applied', 'Test', 'Interview', 'Shortlisted', 'Offer', 'Rejected']
+const FORM_STATUSES = ['Submitted', 'To Do', 'In Progress', 'Done']
 const TAG_OPTIONS = ['Dream', 'Backup', 'Off-campus', 'PPO', 'Internship']
 
 const ApplicationDetail = () => {
@@ -122,6 +124,33 @@ const ApplicationDetail = () => {
                         </div>
                         <div className="card-body">
                             <div className="detail-row">
+                                <label>Category</label>
+                                {editing ? (
+                                    <select
+                                        name="category"
+                                        className="form-select"
+                                        value={formData.category || 'Placement'}
+                                        onChange={(e) => {
+                                            const newCategory = e.target.value
+                                            setFormData(prev => ({
+                                                ...prev,
+                                                category: newCategory,
+                                                status: newCategory === 'Placement' ? 'Applied' : 'Submitted'
+                                            }))
+                                        }}
+                                    >
+                                        <option value="Placement">Placement</option>
+                                        <option value="Form">General Form</option>
+                                    </select>
+                                ) : (
+                                    <span className={`category-badge ${application.category === 'Form' ? 'cat-form' : 'cat-placement'}`}>
+                                        {application.category === 'Form' ? <GeneralIcon className="badge-icon" /> : <PlacementIcon className="badge-icon" />}
+                                        {application.category === 'Form' ? 'General' : 'Placement'}
+                                    </span>
+                                )}
+                            </div>
+
+                            <div className="detail-row">
                                 <label>Status</label>
                                 {editing ? (
                                     <select
@@ -130,19 +159,19 @@ const ApplicationDetail = () => {
                                         value={formData.status}
                                         onChange={handleChange}
                                     >
-                                        {STATUS_OPTIONS.map(status => (
+                                        {(formData.category === 'Form' ? FORM_STATUSES : PLACEMENT_STATUSES).map(status => (
                                             <option key={status} value={status}>{status}</option>
                                         ))}
                                     </select>
                                 ) : (
-                                    <span className={`badge badge-${application.status.toLowerCase()}`}>
+                                    <span className={`badge badge-${application.status.toLowerCase().replace(/\s+/g, '-')}`}>
                                         {application.status}
                                     </span>
                                 )}
                             </div>
 
                             <div className="detail-row">
-                                <label>Company</label>
+                                <label>{(editing ? formData.category : application.category) === 'Placement' ? 'Company' : 'Organization'}</label>
                                 {editing ? (
                                     <input
                                         type="text"
@@ -150,7 +179,7 @@ const ApplicationDetail = () => {
                                         className="form-input"
                                         value={formData.company || ''}
                                         onChange={handleChange}
-                                        placeholder="Enter company name"
+                                        placeholder={(formData.category === 'Placement' ? "Enter company name" : "Enter organization/context")}
                                     />
                                 ) : (
                                     <span>{application.company || '-'}</span>

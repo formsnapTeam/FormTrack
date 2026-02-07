@@ -23,9 +23,20 @@ const applicationSchema = new mongoose.Schema({
         trim: true,
         maxlength: [100, 'Company name cannot exceed 100 characters']
     },
+    category: {
+        type: String,
+        enum: ['Placement', 'Form'],
+        default: 'Placement',
+        index: true
+    },
     status: {
         type: String,
-        enum: ['Applied', 'Test', 'Interview', 'Shortlisted', 'Offer', 'Rejected'],
+        enum: [
+            // Placement Statuses
+            'Applied', 'Test', 'Interview', 'Shortlisted', 'Offer', 'Rejected',
+            // General Form Statuses
+            'Submitted', 'To Do', 'In Progress', 'Done'
+        ],
         default: 'Applied'
     },
     deadline: {

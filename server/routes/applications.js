@@ -50,12 +50,17 @@ router.get('/analytics', async (req, res, next) => {
         const stats = {
             total: applications.length,
             byStatus: {},
+            byCategory: {},
             byTag: {}
         }
 
         applications.forEach(app => {
             // Count by status
             stats.byStatus[app.status] = (stats.byStatus[app.status] || 0) + 1
+
+            // Count by category
+            const category = app.category || 'Placement'
+            stats.byCategory[category] = (stats.byCategory[category] || 0) + 1
 
             // Count by tags
             if (app.tags && app.tags.length > 0) {
@@ -76,7 +81,7 @@ router.get('/analytics', async (req, res, next) => {
 // @access  Private
 router.post('/', async (req, res, next) => {
     try {
-        const { formTitle, formUrl, company, status, deadline, notes, tags } = req.body
+        const { formTitle, formUrl, company, category, status, deadline, notes, tags } = req.body
 
         if (!formTitle || !formUrl) {
             return res.status(400).json({
@@ -90,7 +95,8 @@ router.post('/', async (req, res, next) => {
             formTitle,
             formUrl,
             company: company || '',
-            status: status || 'Applied',
+            category: category || 'Placement',
+            status: status || (category === 'Form' ? 'Submitted' : 'Applied'),
             deadline: deadline || null,
             notes: notes || '',
             tags: tags || []
@@ -114,7 +120,7 @@ router.post('/', async (req, res, next) => {
 // @access  Private
 router.post('/bookmarklet', async (req, res, next) => {
     try {
-        const { formTitle, formUrl } = req.body
+        const { formTitle, formUrl, category } = req.body
 
         if (!formTitle || !formUrl) {
             return res.status(400).json({
@@ -150,7 +156,8 @@ router.post('/bookmarklet', async (req, res, next) => {
             formTitle,
             formUrl,
             company,
-            status: 'Applied'
+            category: category || 'Placement',
+            status: (category === 'Form' ? 'Submitted' : 'Applied')
         })
 
         res.status(201).json({
@@ -190,7 +197,7 @@ router.get('/:id', async (req, res, next) => {
 // @access  Private
 router.patch('/:id', async (req, res, next) => {
     try {
-        const allowedUpdates = ['formTitle', 'company', 'status', 'deadline', 'notes', 'tags']
+        const allowedUpdates = ['formTitle', 'company', 'category', 'status', 'deadline', 'notes', 'tags']
         const updates = {}
 
         Object.keys(req.body).forEach(key => {

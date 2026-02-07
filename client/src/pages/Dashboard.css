@@ -155,6 +155,64 @@
     color: var(--status-rejected);
 }
 
+/* General Form Statuses */
+.status-badge.badge-submitted {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+}
+
+.status-badge.badge-to-do {
+    background: rgba(234, 179, 8, 0.15);
+    color: #facc15;
+}
+
+.status-badge.badge-in-progress {
+    background: rgba(168, 85, 247, 0.15);
+    color: #c084fc;
+}
+
+.status-badge.badge-done {
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+}
+
+/* Category Badges */
+.category-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.65rem;
+    font-weight: 600;
+    margin-right: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    height: 20px;
+}
+
+.cat-placement {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--primary-400);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.cat-form {
+    background: rgba(236, 72, 153, 0.1);
+    color: #f472b6;
+    border: 1px solid rgba(236, 72, 153, 0.2);
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+}
+
+.badge-icon {
+    width: 14px;
+    height: 14px;
+    margin-right: 4px;
+}
+
 /* ========================================
    Deadline Cells - Color Coded
    ======================================== */

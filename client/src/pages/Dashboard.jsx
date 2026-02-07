@@ -2,9 +2,12 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import api from '../services/api'
 import AddApplicationModal from '../components/AddApplicationModal'
+import { PlacementIcon, GeneralIcon } from '../components/Icons'
 import './Dashboard.css'
 
-const STATUS_OPTIONS = ['Applied', 'Test', 'Interview', 'Shortlisted', 'Offer', 'Rejected']
+const PLACEMENT_STATUSES = ['Applied', 'Test', 'Interview', 'Shortlisted', 'Offer', 'Rejected']
+const FORM_STATUSES = ['Submitted', 'To Do', 'In Progress', 'Done']
+const ALL_STATUSES = [...new Set([...PLACEMENT_STATUSES, ...FORM_STATUSES])]
 
 const Dashboard = () => {
     const [applications, setApplications] = useState([])
@@ -58,8 +61,9 @@ const Dashboard = () => {
 
     // CSV Export
     const handleExportCSV = () => {
-        const headers = ['Company', 'Form Title', 'Status', 'Date Applied', 'Deadline', 'Notes', 'Tags']
+        const headers = ['Category', 'Company', 'Form Title', 'Status', 'Date Applied', 'Deadline', 'Notes', 'Tags']
         const rows = filteredApplications.map(app => [
+            app.category || 'Placement',
             app.company || '',
             app.formTitle,
             app.status,
@@ -247,7 +251,7 @@ const Dashboard = () => {
                         onChange={(e) => setStatusFilter(e.target.value)}
                     >
                         <option value="">All Statuses</option>
-                        {STATUS_OPTIONS.map(status => (
+                        {ALL_STATUSES.map(status => (
                             <option key={status} value={status}>{status}</option>
                         ))}
                     </select>
@@ -281,17 +285,23 @@ const Dashboard = () => {
                                         <tr key={app._id} className={`animate-fadeIn ${deadlineStatus === 'today' || deadlineStatus === 'urgent' ? 'row-urgent' : ''}`}>
                                             <td>
                                                 <div className="app-info">
-                                                    <span className="app-title">{app.formTitle}</span>
+                                                    <div className="app-header">
+                                                        <span className={`category-badge ${app.category === 'Form' ? 'cat-form' : 'cat-placement'}`}>
+                                                            {app.category === 'Form' ? <GeneralIcon className="badge-icon" /> : <PlacementIcon className="badge-icon" />}
+                                                            {app.category === 'Form' ? 'General' : 'Placement'}
+                                                        </span>
+                                                        <span className="app-title">{app.formTitle}</span>
+                                                    </div>
                                                     {app.company && <span className="app-company">{app.company}</span>}
                                                 </div>
                                             </td>
                                             <td>
                                                 <select
-                                                    className={`status-badge badge-${app.status.toLowerCase()}`}
+                                                    className={`status-badge badge-${app.status.toLowerCase().replace(/\s+/g, '-')}`}
                                                     value={app.status}
                                                     onChange={(e) => handleStatusChange(app._id, e.target.value)}
                                                 >
-                                                    {STATUS_OPTIONS.map(status => (
+                                                    {(app.category === 'Form' ? FORM_STATUSES : PLACEMENT_STATUSES).map(status => (
                                                         <option key={status} value={status}>{status}</option>
                                                     ))}
                                                 </select>
